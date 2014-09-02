@@ -10,9 +10,8 @@ try:
 except ImportError:
     from StringIO import StringIO as BytesIO
 
-
 #To parse package version 
-for line in open("carbon-rewriter/version.py"):
+for line in open("lib/carbon_rewriter/version.py"):
     m = re.match('__version__ = "(.*)"', line)
     if m:
         version = m.group(1)
@@ -39,15 +38,13 @@ else:
 with open('setup.cfg','wb') as f:
     cf.write(f)
 
-if os.environ.get('USE_SETUPTOOLS'):
-    from setuptools import setup
-    setup_kwargs = dict(zip_safe=0)
-else:
-    from distutils.core import setup
-    setup_kwargs = dict()
+from setuptools import setup
+setup_kwargs = dict(zip_safe=0)
 
 requires = [
-    "carbon"
+    "carbon",
+    "Twisted<12.0",
+    "whisper"
 ]
 
 conf_files = [ ('conf', glob('conf/*.example')) ]
@@ -62,7 +59,8 @@ try:
         license='Apache Software License 2.0',
         description='Carbon-rewriter is rewriting metric name and then sending to destinations',
         long_description='Carbon-rewriter is rewriting metric name and then sending to destinations',
-        packages=['carbon-rewriter'],
+        packages=['carbon_rewriter'],
+        package_dir={'' : 'lib'},
         scripts=glob('bin/*'),
         data_files=install_files,
         install_requires=requires,

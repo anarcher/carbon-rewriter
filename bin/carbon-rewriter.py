@@ -14,6 +14,7 @@ LIB_DIR = os.path.join(ROOT_DIR, "lib")
 sys.path.insert(0, LIB_DIR)
 
 from carbon.util import run_twistd_plugin
+#from carbon_rewriter.util import run_twistd_plugin
 from carbon.exceptions import CarbonConfigException
 
 try:
