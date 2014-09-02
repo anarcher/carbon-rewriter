@@ -2,8 +2,8 @@
 import sys
 import os
 import re
-import glob
 import ConfigParser
+from glob import glob
 
 try:
     from io import BytesIO
@@ -43,9 +43,8 @@ if os.environ.get('USE_SETUPTOOLS'):
     from setuptools import setup
     setup_kwargs = dict(zip_safe=0)
 else:
-    from disutils.core import setup
+    from distutils.core import setup
     setup_kwargs = dict()
-
 
 requires = [
     "carbon"
@@ -72,5 +71,3 @@ try:
 finally:
     with open('setup.cfg','w') as f:
         f.write(orig_setup_cfg)
-
-
